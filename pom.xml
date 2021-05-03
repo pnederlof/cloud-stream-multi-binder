@@ -30,6 +30,15 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-stream-binder-kafka-streams</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-stream-binder-kafka</artifactId>
+		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>nl.logius.gegevensuitwisseling</groupId>-->
+<!--			<artifactId>activemq-binder</artifactId>-->
+<!--			<version>0.0.1</version>-->
+<!--		</dependency>-->
 
 		<dependency>
 			<groupId>io.micrometer</groupId>

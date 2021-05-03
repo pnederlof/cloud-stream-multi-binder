@@ -33,4 +33,21 @@ public class CloudStreamMultiBinderApplication {
         });
     }
 
+    @Bean
+    public Function<String, String> processKafka() {
+        return input -> {
+            logger.info("Processing with Kafka Binder: {}", input);
+            return input;
+        };
+    }
+
+//    @Bean
+//    public Function<String, String> processActiveMq() {
+//        return input -> {
+//            logger.info("Processing with ActiveMQ: {}", input);
+//            return input;
+//        };
+//    }
+
+
 }

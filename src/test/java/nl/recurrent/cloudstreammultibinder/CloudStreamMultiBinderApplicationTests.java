@@ -48,7 +48,7 @@ class CloudStreamMultiBinderApplicationTests {
     void setUp() {
         producer = createProducer();
         consumer = createConsumer();
-        consumer.subscribe(List.of("processKafkaStreams-in-0", "processKafkaStreams-out-0"));
+        consumer.subscribe(List.of("processKafkaStreams-in-0", "processKafkaStreams-out-0", "processKafka-in-0", "processKafka-out-0"));
         consumer.poll(Duration.ofMillis(200));
     }
 
@@ -66,14 +66,38 @@ class CloudStreamMultiBinderApplicationTests {
 
     @Test
     void kafkaStreamsBinder_processesMessage() {
-        producer.send(new ProducerRecord<>("processKafkaStreams-in-0", "key", "value"));
+        producer.send(new ProducerRecord<>("processKafkaStreams-in-0", "key", "valueKafkaStreams"));
         producer.flush();
         consumer.subscribe(List.of("processKafkaStreams-out-0"));
 
         ConsumerRecords<String, String> consumerRecords = consumer.poll(Duration.ofSeconds(5L));
 
         assertThat(consumerRecords).hasSize(1);
-        assertThat(consumerRecords.records("processKafkaStreams-out-0").iterator().next().value()).isEqualTo("value");
+        assertThat(consumerRecords.records("processKafkaStreams-out-0").iterator().next().value()).isEqualTo("valueKafkaStreams");
+    }
+
+    @Test
+    void kafkaBinder_processesMessage() {
+        producer.send(new ProducerRecord<>("processKafka-in-0", "key", "valueKafka"));
+        producer.flush();
+        consumer.subscribe(List.of("processKafka-out-0"));
+
+        ConsumerRecords<String, String> consumerRecords = consumer.poll(Duration.ofSeconds(5L));
+
+        assertThat(consumerRecords).hasSize(1);
+        assertThat(consumerRecords.records("processKafka-out-0").iterator().next().value()).isEqualTo("valueKafka");
+    }
+
+    @Test
+    void activeMqBinder_processesMessage() {
+        producer.send(new ProducerRecord<>("processActiveMq-in-0", "key", "valueActiveMq"));
+        producer.flush();
+        consumer.subscribe(List.of("processActiveMq-out-0"));
+
+        ConsumerRecords<String, String> consumerRecords = consumer.poll(Duration.ofSeconds(5L));
+
+        assertThat(consumerRecords).hasSize(1);
+        assertThat(consumerRecords.records("processActiveMq-out-0").iterator().next().value()).isEqualTo("valueActiveMq");
     }
 
     @AfterEach
