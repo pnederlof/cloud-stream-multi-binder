@@ -12,7 +12,7 @@
 	<artifactId>cloud-stream-multi-binder</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>cloud-stream-multi-binder</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Applicaton with multiple binders</description>
 	<properties>
 		<java.version>11</java.version>
 		<spring-cloud.version>2020.0.2</spring-cloud.version>
@@ -34,11 +34,6 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-stream-binder-kafka</artifactId>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>nl.logius.gegevensuitwisseling</groupId>-->
-<!--			<artifactId>activemq-binder</artifactId>-->
-<!--			<version>0.0.1</version>-->
-<!--		</dependency>-->
 
 		<dependency>
 			<groupId>io.micrometer</groupId>

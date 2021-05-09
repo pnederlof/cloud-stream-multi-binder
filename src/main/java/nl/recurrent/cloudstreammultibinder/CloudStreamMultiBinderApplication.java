@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.scheduling.support.SimpleTriggerContext;
 
 import java.util.function.Function;
 
@@ -28,9 +27,7 @@ public class CloudStreamMultiBinderApplication {
 
     @Bean
     public Function<KStream<String, String>, KStream<String, String>> processKafkaStreams() {
-        return input -> input.peek((key, value) -> {
-            logger.info("Processing with Kafka Streams Binder: {}", value);
-        });
+        return input -> input.peek((key, value) -> logger.info("Processing with Kafka Streams Binder: {}", value));
     }
 
     @Bean
@@ -40,14 +37,5 @@ public class CloudStreamMultiBinderApplication {
             return input;
         };
     }
-
-//    @Bean
-//    public Function<String, String> processActiveMq() {
-//        return input -> {
-//            logger.info("Processing with ActiveMQ: {}", input);
-//            return input;
-//        };
-//    }
-
 
 }
